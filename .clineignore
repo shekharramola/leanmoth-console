@@ -1,0 +1,23 @@
+### 1. Block local configuration environment keys globally across all scopes
+
+**/.env
+**/.env.local
+**/.env.*.local
+**/*.env 
+
+### 2. Match and skip dependencies dynamically anywhere they spawn
+
+**/node_modules/
+**/node_modules/**/* 
+
+### 3. Block nested serverless build caches and compiled assets
+
+**/dist/
+**/.next/
+**/.wrangler/ 
+
+### 4. Standard hidden system boundaries
+
+.git/
+.DS_Store
+Thumbs.db

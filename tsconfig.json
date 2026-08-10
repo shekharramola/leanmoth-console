@@ -18,8 +18,10 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "@backend-types": ["./src/@types/api-contract.d.ts"]
     }
   },
   "include": [
