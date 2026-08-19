@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export", // Forces static HTML/JS compilation for Cloudflare Pages
+  output: "export",
+  distDir: "out",
+  /* CRITICAL FOR SERVERLESS ISOLATE RENDERS */
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;

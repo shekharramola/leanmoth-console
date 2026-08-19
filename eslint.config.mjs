@@ -1,17 +1,39 @@
 import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
+import importPlugin from "eslint-plugin-import";
 
 const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  // Override default ignores of eslint-config-next.
+  ...nextCoreWebVitals,
+  ...nextTypescript,
+  {
+    files: ["**/*.{ts,tsx}"],
+    plugins: { import: importPlugin },
+    rules: {
+      "import/order": [
+        "error",
+        {
+          groups: ["builtin", "external", "internal", ["parent", "sibling", "index"]],
+          alphabetize: { order: "asc", caseInsensitive: true },
+          "newlines-between": "always",
+        },
+      ],
+      "no-restricted-syntax": [
+        "warn",
+        {
+          selector: "Identifier[name=/^(x|tmp|data|res|err)$/]",
+          message: "Use a descriptive, self-documenting name instead (see spec Section 8).",
+        },
+      ],
+    },
+  },
+
   globalIgnores([
-    // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "src/@types/api-contract.d.ts",
   ]),
 ]);
 

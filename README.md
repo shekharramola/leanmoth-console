@@ -49,14 +49,14 @@ The dashed nodes (edge API, report history DB) live in a private repository and 
 
 ## Stack
 
-| Layer | Choice |
-|---|---|
-| Framework | Next.js, static export |
-| Charts | Recharts |
-| Language | TypeScript, strict mode |
+| Layer        | Choice                                                                                                                 |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| Framework    | Next.js, static export                                                                                                 |
+| Charts       | Recharts                                                                                                               |
+| Language     | TypeScript, strict mode                                                                                                |
 | API contract | Generated types from the backend's Hono RPC definitions — no hand-maintained interface drift between client and server |
-| Testing | Vitest + Happy DOM |
-| Hosting | Cloudflare Pages |
+| Testing      | Vitest + Happy DOM                                                                                                     |
+| Hosting      | Cloudflare Pages                                                                                                       |
 
 ---
 

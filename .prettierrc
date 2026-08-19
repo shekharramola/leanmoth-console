@@ -1,0 +1,18 @@
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": false,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": ["*.json", "*.jsonc", "wrangler.jsonc", "package.json", "tsconfig.json"],
+      "options": {
+        "trailingComma": "none"
+      }
+    }
+  ]
+}

@@ -1,25 +1,41 @@
 "use client";
 import { hc } from "hono/client";
 import React, { useState } from "react";
-// Pulls live route signatures natively from your committed contract asset!
+
 import type { AppType } from "@backend-types";
 
-// Initialize the lightweight, type-safe Hono RPC Client mesh
-const client = hc<AppType>("http://127.0.0.1:8787");
+// Force local development fetches to point straight to your running Wrangler engine container
+const baseUrl =
+  typeof window !== "undefined"
+    ? window.location.hostname === "localhost"
+      ? "http://localhost:8787"
+      : window.location.origin
+    : "http://localhost:8787";
+
+const client = hc<AppType>(baseUrl);
 
 export default function HomeDashboardPage() {
   const [systemStatusMessage, setSystemStatusMessage] = useState<string>("Disconnected");
+  const [databaseMetrics, setDatabaseMetrics] = useState<string>(
+    "No database metrics compiled yet."
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function executeIntegrationHandshake() {
     setIsLoading(true);
     try {
-      // Full autocomplete route signatures display natively inside your editor tabs!
-      // const response = await client.api.skeleton.$get();
-      const response = await client.api.brokenRouteFake.$get();
-      const data = (await response.json()) as { status: string; message: string };
-      setSystemStatusMessage(`Connected! Engine Response: ${data.message}`);
-    } catch (error) {
+      const response = await client.api.skeleton.$get();
+      const skeletonRouteResponse = (await response.json()) as {
+        status: string;
+        message: string;
+        databaseMetricRow?: string;
+      };
+
+      setSystemStatusMessage(`Live Edge Server: ${skeletonRouteResponse.message}`);
+      if (skeletonRouteResponse.databaseMetricRow) {
+        setDatabaseMetrics(skeletonRouteResponse.databaseMetricRow);
+      }
+    } catch {
       setSystemStatusMessage("Cross-Repository Handshake Matrix Failed");
     } finally {
       setIsLoading(false);
@@ -31,7 +47,7 @@ export default function HomeDashboardPage() {
       <div className="max-w-xl mx-auto mt-12 space-y-6">
         <header className="space-y-1">
           <h1 className="text-2xl font-bold tracking-tight text-blue-600">ZeroEgress</h1>
-          <p className="text-xs text-slate-500">Contract-Driven E2E Verification Portal</p>
+          <p className="text-xs text-slate-500">Live Monolithic Edge Dashboard</p>
         </header>
 
         <div className="p-6 bg-white border border-slate-200 rounded-xl space-y-4 shadow-sm">
@@ -40,11 +56,18 @@ export default function HomeDashboardPage() {
             disabled={isLoading}
             className="w-full py-2.5 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 disabled:bg-slate-400 transition"
           >
-            {isLoading ? "Executing Handshake..." : "Run E2E Pipeline Handshake"}
+            {isLoading ? "Reaching Cloud Network..." : "Query Live Monolithic Ledger"}
           </button>
 
-          <div className="text-center p-3 bg-slate-100 rounded-lg text-xs font-mono">
-            Matrix Status: <span className="font-bold">{systemStatusMessage}</span>
+          <div className="p-4 bg-slate-100 rounded-lg text-xs font-mono space-y-2">
+            <div>
+              Network Status:{" "}
+              <span className="font-bold text-emerald-600">{systemStatusMessage}</span>
+            </div>
+            <div className="border-t border-slate-200 pt-2 text-slate-600">
+              Database Ledger state:{" "}
+              <span className="font-bold text-blue-600">{databaseMetrics}</span>
+            </div>
           </div>
         </div>
       </div>
