@@ -22,6 +22,7 @@ export default function HomeDashboardPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function executeIntegrationHandshake() {
+    const a = "b";
     setIsLoading(true);
     try {
       const response = await client.api.skeleton.$get();
