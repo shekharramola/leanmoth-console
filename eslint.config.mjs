@@ -1,3 +1,4 @@
+import tsParser from "@typescript-eslint/parser";
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";
@@ -8,6 +9,10 @@ const eslintConfig = defineConfig([
   ...nextTypescript,
   {
     files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: { project: "./tsconfig.json", sourceType: "module" },
+    },
     plugins: { import: importPlugin },
     rules: {
       "import/order": [
@@ -25,9 +30,11 @@ const eslintConfig = defineConfig([
           message: "Use a descriptive, self-documenting name instead (see spec Section 8).",
         },
       ],
+      "@typescript-eslint/no-unused-vars": "error",
+      "@typescript-eslint/no-floating-promises": "error",
+      "@typescript-eslint/no-explicit-any": "warn",
     },
   },
-
   globalIgnores([
     ".next/**",
     "out/**",
