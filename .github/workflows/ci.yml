@@ -31,5 +31,11 @@ jobs:
       - name: Test (Vitest)
         run: npm test
 
+      # Build runs before typecheck deliberately: Next.js generates types like LayoutProps into
+      # .next/types/ only during build. Running typecheck first fails on a fresh checkout since
+      # that file doesn't exist yet — see https://github.com/vercel/next.js/issues/53973
       - name: Build (Next.js static export)
         run: npm run build
+
+      - name: Typecheck (tsc --noEmit)
+        run: npm run typecheck
