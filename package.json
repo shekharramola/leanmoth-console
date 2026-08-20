@@ -11,7 +11,8 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "prepare": "husky",
-    "test": "vitest run"
+    "test": "vitest run",
+    "verify": "npm run format && npm run lint && npm test && npm run build && npm run typecheck"
   },
   "dependencies": {
     "hono": "^4.13.1",
