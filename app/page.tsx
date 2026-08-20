@@ -2,15 +2,14 @@
 import { hc } from "hono/client";
 import React, { useState } from "react";
 
+import { resolveApiBaseUrl } from "@/lib/resolveApiBaseUrl";
 import type { AppType } from "@backend-types";
 
 // Force local development fetches to point straight to your running Wrangler engine container
-const baseUrl =
-  typeof window !== "undefined"
-    ? window.location.hostname === "localhost"
-      ? "http://localhost:8787"
-      : window.location.origin
-    : "http://localhost:8787";
+const baseUrl = resolveApiBaseUrl(
+  typeof window !== "undefined" ? window.location.hostname : undefined,
+  typeof window !== "undefined" ? window.location.origin : ""
+);
 
 const client = hc<AppType>(baseUrl);
 
