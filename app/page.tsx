@@ -2,6 +2,7 @@
 import { hc } from "hono/client";
 import React, { useState } from "react";
 
+import { DropZone } from "@/features/ingestion/Dropzone";
 import { resolveApiBaseUrl } from "@/lib/resolveApiBaseUrl";
 import type { AppType } from "@backend-types";
 
@@ -70,6 +71,7 @@ export default function HomeDashboardPage() {
           </div>
         </div>
       </div>
+      <DropZone />
     </main>
   );
 }

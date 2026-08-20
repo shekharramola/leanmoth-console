@@ -26,7 +26,8 @@ const eslintConfig = defineConfig([
       "no-restricted-syntax": [
         "warn",
         {
-          selector: "Identifier[name=/^(x|tmp|data|res|err)$/]",
+          selector:
+            "Identifier[name=/^(x|tmp|data|res|err)$/]:not(MemberExpression > Identifier.property)",
           message: "Use a descriptive, self-documenting name instead (see spec Section 8).",
         },
       ],
