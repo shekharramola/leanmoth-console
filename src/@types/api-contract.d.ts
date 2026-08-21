@@ -13,6 +13,56 @@ declare const routes: import("hono/hono-base").HonoBase<
   | import("hono/types").BlankSchema
   | import("hono/types").MergeSchemaPath<
       {
+        "/request-link": {
+          $post:
+            | {
+                input: {};
+                output: {
+                  error: string;
+                };
+                outputFormat: "json";
+                status: 400;
+              }
+            | {
+                input: {};
+                output: {
+                  sent: true;
+                };
+                outputFormat: "json";
+                status: import("hono/utils/http-status").ContentfulStatusCode;
+              };
+        };
+      } & {
+        "/verify": {
+          $get:
+            | {
+                input: {};
+                output: {
+                  error: string;
+                };
+                outputFormat: "json";
+                status: 400;
+              }
+            | {
+                input: {};
+                output: {
+                  error: string;
+                };
+                outputFormat: "json";
+                status: 401;
+              }
+            | {
+                input: {};
+                output: undefined;
+                outputFormat: "redirect";
+                status: 302;
+              };
+        };
+      },
+      "/api/auth"
+    >
+  | import("hono/types").MergeSchemaPath<
+      {
         "/": {
           $get: {
             input: {};
