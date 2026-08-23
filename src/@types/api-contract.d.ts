@@ -64,6 +64,32 @@ declare const routes: import("hono/hono-base").HonoBase<
   | import("hono/types").MergeSchemaPath<
       {
         "/": {
+          $post:
+            | {
+                input: {};
+                output: {
+                  error: string;
+                };
+                outputFormat: "json";
+                status: 400;
+              }
+            | {
+                input: {};
+                output: {
+                  reportId: string;
+                  awsTotalVolumeGb: number;
+                  potentialMonthlySavingsUsd: number;
+                };
+                outputFormat: "json";
+                status: import("hono/utils/http-status").ContentfulStatusCode;
+              };
+        };
+      },
+      "/api/analyze"
+    >
+  | import("hono/types").MergeSchemaPath<
+      {
+        "/": {
           $get: {
             input: {};
             output: {
