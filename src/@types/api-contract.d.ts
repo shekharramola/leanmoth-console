@@ -103,6 +103,64 @@ declare const routes: import("hono/hono-base").HonoBase<
         };
       },
       "/api/skeleton"
+    >
+  | import("hono/types").MergeSchemaPath<
+      {
+        "/:id": {
+          $get:
+            | {
+                input: {
+                  param: {
+                    id: string;
+                  };
+                };
+                output: {
+                  error: string;
+                };
+                outputFormat: "json";
+                status: 404;
+              }
+            | {
+                input: {
+                  param: {
+                    id: string;
+                  };
+                };
+                output:
+                  | {
+                      status: "unpaid";
+                      awsTotalVolumeGb: number;
+                      potentialMonthlySavingsUsd: number;
+                    }
+                  | {
+                      status: "paid";
+                      awsTotalVolumeGb: number;
+                      potentialMonthlySavingsUsd: number;
+                      findings: import("hono/utils/types").JSONValue;
+                    };
+                outputFormat: "json";
+                status: 200;
+              };
+        };
+      } & {
+        "/": {
+          $get: {
+            input: {};
+            output: {
+              reports: {
+                id: string;
+                paymentStatus: "pending" | "paid";
+                awsTotalVolumeGb: number;
+                potentialMonthlySavingsUsd: number;
+                createdAt: string;
+              }[];
+            };
+            outputFormat: "json";
+            status: import("hono/utils/http-status").ContentfulStatusCode;
+          };
+        };
+      },
+      "/api/reports"
     >,
   "/",
   "/"
