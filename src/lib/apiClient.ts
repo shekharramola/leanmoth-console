@@ -9,4 +9,6 @@ const baseUrl = resolveApiBaseUrl(
   typeof window !== "undefined" ? window.location.origin : ""
 );
 
-export const apiClient = hc<AppType>(baseUrl);
+export const apiClient = hc<AppType>(baseUrl, {
+  init: { credentials: "include" },
+});
