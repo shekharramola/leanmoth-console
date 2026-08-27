@@ -8,6 +8,55 @@ import { apiClient } from "@/lib/apiClient";
 type ReportApiResponse = InferResponseType<(typeof apiClient.api.reports)[":id"]["$get"], 200>;
 type ReportView = { status: "loading" } | { status: "error" } | ReportApiResponse;
 
+const masterPageContainer =
+  "min-h-screen bg-background text-on-surface font-body-md antialiased flex flex-col select-none";
+const mainWorkspaceCanvas = "flex-1 max-w-2xl w-full mx-auto p-6 md:p-12 space-y-8";
+const introBlockHeading = "text-left space-y-1.5 pb-6 border-b border-surface-variant/20";
+const primaryHeadlineH1 = "text-3xl font-bold font-main text-white tracking-tight";
+const descriptionText = "text-sm text-on-surface-variant font-main leading-relaxed";
+
+// State Message Layout Containers
+const statusFeedbackBox =
+  "p-4 border border-outline-variant/20 rounded bg-surface-container-low font-mono text-xs uppercase tracking-wider text-on-surface-variant/70 flex items-center gap-2.5 animate-fadeIn";
+const loadingEnclaveView =
+  "min-h-[40vh] flex flex-col items-center justify-center font-mono text-xs text-on-surface-variant/60 uppercase tracking-widest gap-2.5";
+const criticalErrorView =
+  "min-h-[40vh] flex flex-col items-center justify-center font-mono text-xs text-error uppercase tracking-widest gap-2.5";
+
+// Success Report Elements
+const successBannerCard =
+  "p-5 border border-primary-container/20 rounded bg-surface-container-low/40 flex gap-4 items-start shadow-xl shadow-black/20 animate-fadeIn";
+const successBannerBody = "text-sm font-main text-on-surface-variant leading-relaxed";
+
+// High-Density Finding Items Stack
+const findingsListStack = "space-y-4 pt-2";
+const findingRowContainer =
+  "p-5 rounded bg-surface-container-lowest border border-surface-variant/20 shadow-lg flex flex-col space-y-2 hover:border-outline-variant/40 transition-colors duration-200 animate-fadeIn";
+const findingHeaderTitle =
+  "font-mono text-xs font-semibold tracking-wider text-white uppercase flex items-center justify-between gap-4";
+const findingCostMetric =
+  "font-data-mono text-sm font-bold text-primary-container px-2 py-0.5 rounded bg-surface border border-surface-variant/30 shrink-0";
+const findingDetailDesc = "font-main text-xs text-on-surface-variant/80 leading-relaxed";
+
+function getComparisonStatus(
+  previous: number,
+  current: number
+): {
+  label: string;
+  colorClass: string;
+} {
+  if (previous === 0) {
+    return { label: "New finding", colorClass: "text-on-surface-variant/60" };
+  }
+  if (current < previous) {
+    return { label: `Down from $${previous}`, colorClass: "text-primary-container" };
+  }
+  if (current > previous) {
+    return { label: `Up from $${previous}`, colorClass: "text-error" };
+  }
+  return { label: "No change since last report", colorClass: "text-on-surface-variant/60" };
+}
+
 function ReportContent() {
   const searchParams = useSearchParams();
   const reportId = searchParams.get("id");
@@ -53,43 +102,120 @@ function ReportContent() {
   }
 
   if (view.status === "loading") {
-    return <p role="status">Loading report...</p>;
+    return (
+      <div className={loadingEnclaveView} role="status">
+        <span className="material-symbols-outlined text-sm text-primary-container animate-spin">
+          progress_activity
+        </span>
+        Decrypting analytical footprint data...
+      </div>
+    );
   }
   if (view.status === "error") {
-    return <p role="alert">Could not load this report.</p>;
+    return (
+      <div className={criticalErrorView} role="alert">
+        <span className="material-symbols-outlined text-base">error</span>
+        Could not load this report.
+      </div>
+    );
   }
 
   return (
-    <main className="min-h-screen p-8 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">
-        ${view.potentialMonthlySavingsUsd}/month in avoidable waste
-      </h1>
-      <p className="text-gray-600 mb-6">Across {view.awsTotalVolumeGb}GB of data transfer.</p>
-
-      {view.status === "unpaid" && (
-        <p role="status" aria-live="polite">
-          Payment not yet confirmed. If you just paid, refresh in a few seconds.
+    <main className={mainWorkspaceCanvas}>
+      <div className={introBlockHeading}>
+        <span className="inline-block px-2 py-0.5 bg-surface-variant border border-surface-variant/60 text-[10px] font-mono tracking-widest text-primary-container uppercase rounded mb-2">
+          &gt;_ Finops Intelligence Briefing
+        </span>
+        <h1 id="report-main-title" className={primaryHeadlineH1}>
+          ${view.potentialMonthlySavingsUsd} / month in avoidable waste
+        </h1>
+        <p className={descriptionText}>
+          Extracted footprint analytics across{" "}
+          <strong className="font-data-mono text-white font-bold">
+            {view.awsTotalVolumeGb} GB
+          </strong>{" "}
+          of unoptimized cloud cross-AZ transfer routes.
         </p>
+      </div>
+      {view.status === "unpaid" && (
+        <div className={statusFeedbackBox} role="status" aria-live="polite">
+          <span className="material-symbols-outlined text-[16px] text-primary-container animate-pulse">
+            lock
+          </span>
+          <span>
+            Transaction Pending. If payment was successfully submitted, refresh console in a few
+            seconds.
+          </span>
+        </div>
       )}
 
       {view.status === "paid" && (
-        <ul className="space-y-3">
-          {/* Cast, not full inference: findings' type gets lost to a generic JSON union because
-        reports.route.ts passes a pre-typed `view` variable to c.json() rather than an object
-        literal — Hono's inference works best on literals at the call site, and falls back to
-        JSONValue once routed through a variable of a broader union type. The backend's real
-        type (WasteFinding[]) is correct; this just doesn't survive into the emitted contract. */}
-          {(
-            view.findings as { label: string; estimatedMonthlyCostUsd: number; detail: string }[]
-          ).map((finding) => (
-            <li key={finding.label} className="border border-gray-300 p-4 rounded-lg">
-              <div className="font-medium">
-                {finding.label} — ${finding.estimatedMonthlyCostUsd}/mo
-              </div>
-              <div className="text-sm text-gray-600">{finding.detail}</div>
-            </li>
-          ))}
-        </ul>
+        <>
+          {/* Recurring Savings Value Pitch Panel */}
+          <div className={successBannerCard}>
+            <span className="material-symbols-outlined text-xl text-primary-container mt-0.5">
+              verified
+            </span>
+            <p className={successBannerBody}>
+              You uncovered{" "}
+              <strong className="text-white">${view.potentialMonthlySavingsUsd}/month</strong> in
+              cloud waste. Every billing cycle after this one, those optimizations represent
+              **recurring capital back in your engine**, recovered for a single flat report fee.
+            </p>
+          </div>
+
+          {/* High-Fidelity Waste Findings Feed */}
+          <div className="space-y-4">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-on-surface-variant/60">
+              Identified Network Waste Vectors
+            </h2>
+            <ul className={findingsListStack}>
+              {(
+                view.findings as {
+                  label: string;
+                  estimatedMonthlyCostUsd: number;
+                  detail: string;
+                }[]
+              ).map((finding) => {
+                const comparisonEntry = (
+                  view.comparison as
+                    | {
+                        label: string;
+                        previousReportMonthlyCostUsd: number;
+                        currentReportMonthlyCostUsd: number;
+                      }[]
+                    | null
+                )?.find((entry) => entry.label === finding.label);
+
+                const comparisonStatus = comparisonEntry
+                  ? getComparisonStatus(
+                      comparisonEntry.previousReportMonthlyCostUsd,
+                      comparisonEntry.currentReportMonthlyCostUsd
+                    )
+                  : null;
+
+                return (
+                  <li key={finding.label} className={findingRowContainer}>
+                    <div className={findingHeaderTitle}>
+                      <span>{finding.label}</span>
+                      <span className={findingCostMetric}>
+                        -${finding.estimatedMonthlyCostUsd}/mo
+                      </span>
+                    </div>
+                    <p className={findingDetailDesc}>{finding.detail}</p>
+                    {comparisonStatus && (
+                      <p
+                        className={`font-mono text-[10px] uppercase tracking-wider ${comparisonStatus.colorClass}`}
+                      >
+                        {comparisonStatus.label}
+                      </p>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </>
       )}
     </main>
   );
@@ -100,8 +226,19 @@ function ReportContent() {
 // static-export architecture entirely.
 export default function ReportPage() {
   return (
-    <Suspense fallback={<p role="status">Loading report...</p>}>
-      <ReportContent />
-    </Suspense>
+    <div className={masterPageContainer}>
+      <Suspense
+        fallback={
+          <div className={loadingEnclaveView} role="status">
+            <span className="material-symbols-outlined text-sm text-primary-container animate-spin">
+              progress_activity
+            </span>
+            Initializing document stream...
+          </div>
+        }
+      >
+        <ReportContent />
+      </Suspense>
+    </div>
   );
 }
