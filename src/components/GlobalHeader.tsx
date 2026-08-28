@@ -24,9 +24,9 @@ export function GlobalHeader() {
         className="text-sm font-mono tracking-wider font-semibold text-white flex items-center gap-2"
       >
         <Image
-          src="/brand/logo.jpg"
-          width={50}
-          height={20}
+          src="/brand/logo.svg"
+          width={100}
+          height={60}
           alt="LeanMoth-logo"
           className="object-contain filter drop-shadow-[0_0_8px_rgba(0,255,157,0.3)]"
         />

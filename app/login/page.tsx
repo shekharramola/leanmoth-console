@@ -23,10 +23,10 @@ export default function LoginPage() {
         <header className="relative z-10 mb-section-gap">
           <div className="mb-8 filter drop-shadow-[0_0_12px_rgba(0,255,157,0.4)]">
             <Image
-              src="/brand/logo.jpg"
+              src="/brand/logo.svg"
               alt="LeanMoth logo"
-              width={40}
-              height={40}
+              width={100}
+              height={60}
               priority // Tells Next.js to load this instantly on first paint without lazy-load lag
               className="w-8 h-8 md:w-10 md:h-10 object-contain"
             />

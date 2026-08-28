@@ -33,7 +33,7 @@ export function Landing() {
 
         <h1 className={mainHeadline}>
           See exactly what is standing between you and{" "}
-          <span className="text-primary-container">zero egress cost</span>.
+          <span className="text-primary-container">lean cloud bill</span>.
         </h1>
 
         <p className={textSubDescription}>
