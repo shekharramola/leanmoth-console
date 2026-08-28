@@ -27,10 +27,10 @@ export function GlobalHeader() {
           src="/brand/logo.jpg"
           width={50}
           height={20}
-          alt="ZeroEgress-logo"
+          alt="LeanMoth-logo"
           className="object-contain filter drop-shadow-[0_0_8px_rgba(0,255,157,0.3)]"
         />
-        <span>ZeroEgress</span>
+        <span>LeanMoth</span>
       </Link>
 
       <div className="flex items-center gap-6">

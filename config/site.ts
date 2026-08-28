@@ -1,7 +1,7 @@
 export const siteConfig = {
-  name: "Zero-Egress",
+  name: "LeanMoth",
   parentBrand: "RAMOLAY",
   links: {
-    github: "https://github.com/shekharramola/zero-egress-frontend",
+    github: "https://github.com/shekharramola/leanmoth-console",
   },
 };

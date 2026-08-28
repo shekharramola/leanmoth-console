@@ -37,9 +37,9 @@ export function Landing() {
         </h1>
 
         <p className={textSubDescription}>
-          ZeroEgress reads and analyzes your AWS Cost & Usage report entirely in your browser. The
-          raw CSV never leaves your machine—only a fully scrubbed, anonymized metrics summary is
-          sent to the backend.
+          LeanMoth reads and analyzes your AWS Cost & Usage report entirely in your browser. The raw
+          CSV never leaves your machine—only a fully scrubbed, anonymized metrics summary is sent to
+          the backend.
         </p>
 
         <div className={featuresTripleGrid} aria-label="Core Architectural Pillars">

@@ -5,7 +5,7 @@ import { LoginForm } from "@/features/auth/LoginForm";
 export default function LoginPage() {
   return (
     <div
-      aria-label="ZeroEgress Access Portal"
+      aria-label="LeanMoth Access Portal"
       className="bg-surface-container-lowest text-on-surface font-body-md antialiased min-h-screen flex flex-col md:flex-row selection:bg-strategic-primary selection:text-surface-container-lowest"
     >
       {/* Left Pane: Branding & Metrics */}
@@ -24,7 +24,7 @@ export default function LoginPage() {
           <div className="mb-8 filter drop-shadow-[0_0_12px_rgba(0,255,157,0.4)]">
             <Image
               src="/brand/logo.jpg"
-              alt="ZeroEgress Optimization Mark"
+              alt="LeanMoth logo"
               width={40}
               height={40}
               priority // Tells Next.js to load this instantly on first paint without lazy-load lag
@@ -33,7 +33,7 @@ export default function LoginPage() {
           </div>
           <div>
             <h1 className="font-display-lg-mobile md:font-display-lg text-white tracking-tight leading-none mb-2">
-              ZeroEgress
+              LeanMoth
               <br className="text-small" />
               Optimization Engine
             </h1>

@@ -8,9 +8,7 @@ describe("resolveBaseApiUrl", () => {
   });
 
   it("uses the current origin in production", () => {
-    expect(resolveApiBaseUrl("zeroegress.in", "https://zeroegress.in")).toBe(
-      "https://zeroegress.in"
-    );
+    expect(resolveApiBaseUrl("leanmoth.in", "https://leanmoth.in")).toBe("https://leanmoth.in");
   });
 
   it("defaults to local dev server when hostname is unavailable (server-side)", () => {

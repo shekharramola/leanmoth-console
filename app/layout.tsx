@@ -19,12 +19,6 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-/* 
-  SENIOR ARCHITECT REMEDY 1: Native Variable Font Mapping
-  By loading the font through Next.js localFont framework with adjustFontFallback,
-  Next.js applies metric overrides directly. 
-  "display: 'swap'" is guaranteed to bind seamlessly without render-blocking stalls.
-*/
 const materialSymbols = localFont({
   src: "./fonts/material-symbols-outlined.woff2",
   variable: "--font-material-symbols",
@@ -33,7 +27,7 @@ const materialSymbols = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "ZeroEgress - Optimization Engine",
+  title: "LeanMoth - Optimization Engine",
   description: "AWS Data-Transfer Cost Auditor",
 };
 

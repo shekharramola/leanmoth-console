@@ -1,8 +1,8 @@
-# ZeroEgress
+# LeanMoth
 
-**See exactly what's standing between you and zero egress cost — without ever uploading your AWS billing file.**
+**See exactly what's standing between you and your AWS cloud cost — without ever uploading your AWS billing file.**
 
-ZeroEgress reads and analyzes your AWS Cost & Usage report entirely in your browser, finds specific, ranked data-transfer waste (cross-AZ chatter, idle Elastic IPs, public-IP-routed internal traffic, and more), and — if you've run a report before — shows whether what you fixed last time actually worked. The raw CSV never leaves your machine; only an anonymized, aggregated summary is sent to the backend. This repository is the client — it's public specifically so that claim doesn't have to be taken on faith. Read `src/features/ingestion/parser.ts` yourself.
+LeanMoth reads and analyzes your AWS Cost & Usage report entirely in your browser, finds specific, ranked data-transfer waste (cross-AZ chatter, idle Elastic IPs, public-IP-routed internal traffic, and more), and — if you've run a report before — shows whether what you fixed last time actually worked. The raw CSV never leaves your machine; only an anonymized, aggregated summary is sent to the backend. This repository is the client — it's public specifically so that claim doesn't have to be taken on faith. Read `src/features/ingestion/parser.ts` yourself.
 
 Pay per report, flat fee — no subscription.
 
@@ -10,7 +10,7 @@ Pay per report, flat fee — no subscription.
 
 ## Why this repo is public
 
-Most cost-analysis tools ask you to upload a CSV full of account IDs, resource names, and spend data to a server you don't control. ZeroEgress's core pitch is that it doesn't have to work that way — parsing and PII-scrubbing happen client-side, in memory, before anything is transmitted.
+Most cost-analysis tools ask you to upload a CSV full of account IDs, resource names, and spend data to a server you don't control. LeanMoth's core pitch is that it doesn't have to work that way — parsing and PII-scrubbing happen client-side, in memory, before anything is transmitted.
 
 That's an easy claim to make and a hard one to trust from marketing copy alone. So the client is open for inspection. The backend (payments, database, AI orchestration) stays private — there's no privacy benefit to publishing it, and it's the part of the business worth protecting.
 
@@ -72,8 +72,8 @@ The dashed nodes (edge API, report history DB) live in a private repository and 
 ## Local development
 
 ```bash
-git clone https://github.com/<your-username>/zero-egress.git
-cd zero-egress
+git clone https://github.com/<your-username>/leanmoth-console.git
+cd leanmoth-console
 npm install
 npm run dev
 ```

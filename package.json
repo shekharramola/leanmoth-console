@@ -1,5 +1,5 @@
 {
-  "name": "zero-egress-frontend",
+  "name": "leanmoth-console",
   "version": "0.1.0",
   "private": true,
   "scripts": {
