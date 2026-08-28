@@ -1,14 +1,18 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import { useState } from "react";
+
+import { useUserSession } from "@/context/UserSessionContext";
 
 import { requestMagicLink } from "./auth.api";
 
 export function LoginForm() {
+  const { isLoggedIn } = useUserSession();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus("sending");
     try {
@@ -25,6 +29,10 @@ export function LoginForm() {
         Check your email for a login link
       </p>
     );
+  }
+
+  if (isLoggedIn) {
+    redirect("/dashboard");
   }
 
   return (
