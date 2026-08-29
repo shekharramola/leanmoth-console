@@ -26,6 +26,14 @@ declare const routes: import("hono/hono-base").HonoBase<
             | {
                 input: {};
                 output: {
+                  sent: true;
+                };
+                outputFormat: "json";
+                status: import("hono/utils/http-status").ContentfulStatusCode;
+              }
+            | {
+                input: {};
+                output: {
                   error: {
                     message: string;
                     statusCode: number | null;
@@ -55,14 +63,6 @@ declare const routes: import("hono/hono-base").HonoBase<
                 };
                 outputFormat: "json";
                 status: 400;
-              }
-            | {
-                input: {};
-                output: {
-                  sent: true;
-                };
-                outputFormat: "json";
-                status: import("hono/utils/http-status").ContentfulStatusCode;
               };
         };
       } & {
@@ -267,6 +267,19 @@ declare const routes: import("hono/hono-base").HonoBase<
                 };
                 outputFormat: "json";
                 status: 400;
+              }
+            | {
+                input: {
+                  param: {
+                    id: string;
+                  };
+                };
+                output: {
+                  checkoutUrl: null;
+                  alreadyUnlocked: true;
+                };
+                outputFormat: "json";
+                status: import("hono/utils/http-status").ContentfulStatusCode;
               }
             | {
                 input: {

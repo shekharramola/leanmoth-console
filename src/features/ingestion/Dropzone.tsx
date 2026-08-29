@@ -111,21 +111,27 @@ export function DropZone() {
               &gt;_ Analysis Output Summary
             </span>
             <span className="text-sm text-white">
-              Identified{" "}
-              <strong className="text-primary-container font-data-mono font-bold">
-                ${result.potentialMonthlySavingsUsd} / month
-              </strong>{" "}
-              in completely avoidable data leakage waste across{" "}
-              <strong className="font-data-mono font-bold text-white">
-                {result.awsTotalVolumeGb} GB
-              </strong>{" "}
-              of unoptimized cross-AZ network traffic routes.
+              {result.potentialMonthlySavingsUsd === 0 ? (
+                "Nothing major found"
+              ) : (
+                <>
+                  Identified{" "}
+                  <strong className="text-primary-container font-data-mono font-bold">
+                    ${result.potentialMonthlySavingsUsd} / month
+                  </strong>{" "}
+                  in completely avoidable data leakage waste across{" "}
+                  <strong className="font-data-mono font-bold text-white">
+                    {result.awsTotalVolumeGb} GB
+                  </strong>{" "}
+                  of unoptimized cross-AZ network traffic routes.
+                </>
+              )}
             </span>
           </span>
         )}
       </p>
 
-      {status === "done" && result && (
+      {status === "done" && result && result.potentialMonthlySavingsUsd > 0 && (
         <div className="pt-2 animate-fadeIn">
           <button onClick={handleUnlockClick} className={checkoutActionBtn}>
             <span className="material-symbols-outlined text-base">lock_open</span>
