@@ -68,6 +68,12 @@ export function GlobalHeader() {
                   onClick={() => setIsMenuOpen(false)}
                 />
                 <div className="absolute right-0 mt-2 w-48 rounded bg-surface border border-surface-variant/40 p-4 shadow-2xl flex flex-col space-y-4 items-start text-left z-50 animate-fadeIn">
+                  <Link
+                    href="/dashboard/reports"
+                    className="block text-sm underline text-on-surface-variant mb-4 text-decoration none"
+                  >
+                    View past reports
+                  </Link>
                   <div className="border-b border-surface-variant/20 pb-2 w-full">
                     <LogoutButton />
                   </div>

@@ -3,6 +3,8 @@ import { InferResponseType } from "hono";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
+import { createCheckoutLink } from "@/features/checkout/checkout.api";
+import { buildReportPdf, Finding } from "@/features/reports/reports.pdfExport";
 import { apiClient } from "@/lib/apiClient";
 
 type ReportApiResponse = InferResponseType<(typeof apiClient.api.reports)[":id"]["$get"], 200>;
@@ -14,6 +16,8 @@ const mainWorkspaceCanvas = "flex-1 max-w-2xl w-full mx-auto p-6 md:p-12 space-y
 const introBlockHeading = "text-left space-y-1.5 pb-6 border-b border-surface-variant/20";
 const primaryHeadlineH1 = "text-3xl font-bold font-main text-white tracking-tight";
 const descriptionText = "text-sm text-on-surface-variant font-main leading-relaxed";
+const checkoutActionBtn =
+  "w-full py-4 px-6 rounded btn-glow text-void-base font-bold font-main text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all hover:opacity-90 active:scale-[0.99] cursor-pointer shadow-[0_0_20px_rgba(0,255,157,0.2)]";
 
 // State Message Layout Containers
 const statusFeedbackBox =
@@ -61,6 +65,7 @@ function ReportContent() {
   const searchParams = useSearchParams();
   const reportId = searchParams.get("id");
   const [view, setView] = useState<ReportView>({ status: "loading" });
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
     if (!reportId) return;
@@ -120,6 +125,32 @@ function ReportContent() {
     );
   }
 
+  async function handlePayNow() {
+    if (!reportId) return;
+    setIsRedirecting(true);
+    try {
+      const checkoutResult = await createCheckoutLink(reportId);
+      if (checkoutResult) {
+        window.location.href =
+          "alreadyUnlocked" in checkoutResult
+            ? `/dashboard/report?id=${reportId}`
+            : checkoutResult.checkoutUrl;
+      }
+    } catch {
+      setIsRedirecting(false);
+    }
+  }
+
+  function handleExportPdf() {
+    if (view.status !== "paid") return;
+    const doc = buildReportPdf({
+      potentialMonthlySavingsUsd: view.potentialMonthlySavingsUsd,
+      awsTotalVolumeGb: view.awsTotalVolumeGb,
+      findings: view.findings as Finding[],
+    });
+    doc.save("leanmoth-report.pdf");
+  }
+
   return (
     <main className={mainWorkspaceCanvas}>
       <div className={introBlockHeading}>
@@ -137,15 +168,16 @@ function ReportContent() {
           of unoptimized cloud cross-AZ transfer routes.
         </p>
       </div>
-      {view.status === "unpaid" && (
+      {view.status === "unpaid" && view.potentialMonthlySavingsUsd > 0 && (
         <div className={statusFeedbackBox} role="status" aria-live="polite">
-          <span className="material-symbols-outlined text-[16px] text-primary-container animate-pulse">
-            lock
-          </span>
-          <span>
-            Transaction Pending. If payment was successfully submitted, refresh console in a few
-            seconds.
-          </span>
+          <span className="material-symbols-outlined text-[16px] text-primary-container">lock</span>
+          <div className="flex flex-col gap-2">
+            <span>Payment not yet confirmed for this report.</span>
+
+            <button onClick={handlePayNow} disabled={isRedirecting} className={checkoutActionBtn}>
+              {isRedirecting ? "Redirecting..." : "Pay now to unlock"}
+            </button>
+          </div>
         </div>
       )}
 
@@ -162,6 +194,9 @@ function ReportContent() {
               cloud waste. Every billing cycle after this one, those optimizations represent
               **recurring capital back in your engine**, recovered for a single flat report fee.
             </p>
+            <button onClick={handleExportPdf} className={checkoutActionBtn}>
+              Export as PDF
+            </button>
           </div>
 
           {/* High-Fidelity Waste Findings Feed */}

@@ -53,7 +53,9 @@ export function DropZone() {
 
     try {
       const checkoutUrl = await createCheckoutLink(result.reportId);
-      window.location.href = checkoutUrl;
+      if (checkoutUrl && typeof checkoutUrl === "string") {
+        window.location.href = checkoutUrl;
+      }
     } catch {
       setStatus("error");
     }
