@@ -6,7 +6,7 @@ import { Dialog, DialogHandle } from "@/components/Dialog";
 import { deleteAccount } from "./account.api";
 
 const entryPurgeBtn =
-  "text-xs font-mono text-error/70 hover:text-error transition-colors uppercase tracking-widest cursor-pointer underline decoration-error/20 hover:decoration-error bg-transparent border-none p-0 self-start text-left";
+  "text-xs font-mono text-error/70 hover:text-error transition-colors uppercase tracking-widest cursor-pointer decoration-error/20 hover:decoration-error bg-transparent border-none p-0 self-start text-left";
 
 const executeDangerBtn =
   "px-4 py-2 rounded bg-error text-on-error font-mono text-xs font-bold uppercase tracking-wider hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer shadow-[0_0_15px_rgba(255,180,171,0.15)] disabled:opacity-50 disabled:cursor-not-allowed";

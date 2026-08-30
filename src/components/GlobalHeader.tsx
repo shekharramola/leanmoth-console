@@ -70,7 +70,7 @@ export function GlobalHeader() {
                 <div className="absolute right-0 mt-2 w-48 rounded bg-surface border border-surface-variant/40 p-4 shadow-2xl flex flex-col space-y-4 items-start text-left z-50 animate-fadeIn">
                   <Link
                     href="/dashboard/reports"
-                    className="block text-sm underline text-on-surface-variant mb-4 text-decoration none"
+                    className="text-xs font-mono text-on-surface-variant/70 hover:text-white transition-colors uppercase tracking-widest cursor-pointer decoration-on-surface-variant/20 hover:decoration-white bg-transparent border-none p-0 self-start text-left"
                   >
                     View past reports
                   </Link>
