@@ -25,8 +25,8 @@ export function GlobalHeader() {
       >
         <Image
           src="/brand/logo.webp"
-          width={60}
-          height={40}
+          width={64}
+          height={64}
           alt="LeanMoth-logo"
           className="object-contain filter drop-shadow-[0_0_8px_rgba(0,255,157,0.3)]"
         />

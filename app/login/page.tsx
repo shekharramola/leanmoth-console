@@ -70,8 +70,8 @@ export default function LoginPage() {
             <Image
               src="/brand/logo.webp"
               alt="LeanMoth logo"
-              width={40}
-              height={40}
+              width={64}
+              height={64}
               priority // Tells Next.js to load this instantly on first paint without lazy-load lag
               className="w-8 h-8 md:w-10 md:h-10 object-contain"
             />
