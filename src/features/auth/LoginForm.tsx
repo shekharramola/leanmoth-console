@@ -1,7 +1,7 @@
 "use client";
 
-import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { useUserSession } from "@/context/UserSessionContext";
 
@@ -11,6 +11,13 @@ export function LoginForm() {
   const { isLoggedIn } = useUserSession();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/dashboard");
+    }
+  }, [isLoggedIn, router]);
 
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,10 +38,6 @@ export function LoginForm() {
     );
   }
 
-  if (isLoggedIn) {
-    redirect("/dashboard");
-  }
-
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
       <div className="space-y-3">
@@ -51,7 +54,6 @@ export function LoginForm() {
             mail
           </span>
           <input
-            aria-label="email"
             className="cost-input w-full bg-[#0f1522] border border-surface-variant rounded text-white font-data-mono py-4 pl-12 pr-4 placeholder-on-surface-variant focus:ring-0 transition-all duration-200"
             id="email"
             name="email"
@@ -69,7 +71,7 @@ export function LoginForm() {
           disabled={status === "sending"}
           type="submit"
           aria-label="Send Magic Link for Authentication"
-          className="w-full cursor-pointer btn-glow text-void-base font-label-lg py-4 px-6 rounded flex items-center justify-center gap-2 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-container-lowest focus:ring-strategic-primary font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(0,255,157,0.3)]"
+          className="w-full cursor-pointer btn-glow text-void-base font-label-lg py-4 px-6 rounded flex items-center justify-center gap-2 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-container-lowest focus:ring-primary-container font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(0,255,157,0.3)]"
         >
           <span className="material-symbols-outlined text-[20px]">auto_mode</span>
           <span className="">SEND MAGIC LINK</span>

@@ -2,14 +2,59 @@ import Image from "next/image";
 
 import { LoginForm } from "@/features/auth/LoginForm";
 
+const trustSignalBlock = "space-y-3 pt-2";
+const trustSignalRow = "flex items-start gap-2.5 text-xs text-on-surface-variant";
+
+function LoginTrustSignals() {
+  return (
+    <div className={trustSignalBlock}>
+      <div className={trustSignalRow}>
+        <span className="material-symbols-outlined text-[16px] text-primary-container shrink-0 mt-0.5">
+          key_off
+        </span>
+        <span>No password — nothing stored that could ever leak in a breach.</span>
+      </div>
+      <div className={trustSignalRow}>
+        <span className="material-symbols-outlined text-[16px] text-primary-container shrink-0 mt-0.5">
+          visibility_off
+        </span>
+        <span>
+          Your AWS billing file never leaves your browser — read our{" "}
+          <a href="/privacy" className="underline hover:text-white">
+            data handling policy
+          </a>
+          .
+        </span>
+      </div>
+      <div className={trustSignalRow}>
+        <span className="material-symbols-outlined text-[16px] text-primary-container shrink-0 mt-0.5">
+          code
+        </span>
+        <span>
+          The client-side code that reads your file is{" "}
+          <a
+            href="https://github.com/shekharramola/leanmoth-console"
+            className="underline hover:text-white"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            public on GitHub
+          </a>{" "}
+          — verify it yourself.
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function LoginPage() {
   return (
     <div
       aria-label="LeanMoth Access Portal"
-      className="bg-surface-container-lowest text-on-surface font-body-md antialiased min-h-screen flex flex-col md:flex-row selection:bg-strategic-primary selection:text-surface-container-lowest"
+      className="bg-surface-container-lowest text-on-surface font-body-md antialiased min-h-screen flex flex-col md:flex-row selection:bg-primary-container selection:text-surface-container-lowest"
     >
-      {/* Left Pane: Branding & Metrics */}
-      <section className="relative w-full md:w-5/12 lg:w-1/2 flex flex-col justify-center p-8 lg:p-16 bg-void-atmosphere border-b md:border-b-0 md:border-r border-strategic-primary/30 overflow-hidden min-h-[50vh] md:min-h-screen">
+      {/* Left Pane: Branding */}
+      <section className="relative w-full md:w-5/12 lg:w-1/2 flex flex-col justify-center p-8 lg:p-16 bg-void-atmosphere border-b md:border-b-0 md:border-r border-primary-container/30 overflow-hidden min-h-[50vh] md:min-h-screen">
         {/* Animated Background Element (Subtle grid) */}
         <div
           className="absolute inset-0 opacity-[0.1] pointer-events-none"
@@ -25,8 +70,8 @@ export default function LoginPage() {
             <Image
               src="/brand/logo.svg"
               alt="LeanMoth logo"
-              width={100}
-              height={60}
+              width={40}
+              height={40}
               priority // Tells Next.js to load this instantly on first paint without lazy-load lag
               className="w-8 h-8 md:w-10 md:h-10 object-contain"
             />
@@ -34,13 +79,13 @@ export default function LoginPage() {
           <div>
             <h1 className="font-display-lg-mobile md:font-display-lg text-white tracking-tight leading-none mb-2">
               LeanMoth
-              <br className="text-small" />
+              <br />
               Optimization Engine
             </h1>
           </div>
         </header>
-        {/* Metrics Cluster */}
       </section>
+
       {/* Right Pane: Authentication */}
       <main
         aria-labelledby="portal-main-heading"
@@ -49,25 +94,17 @@ export default function LoginPage() {
         <div className="w-full max-w-md space-y-10">
           <header className="text-left">
             <span className="inline-block px-2 py-1 bg-surface-variant text-on-surface-variant font-label-md rounded mb-4">
-              Preview
+              Sign In
             </span>
             <h2 className="font-display-lg-mobile text-white mb-2 tracking-tight">
-              Optimization Access Portal
+              Access Your Reports
             </h2>
             <p className="font-body-md text-on-surface-variant">
-              Authenticate to access the resource recovery center
+              Enter your email — we&apos;ll send a secure login link, no password needed.
             </p>
           </header>
           <LoginForm />
-          <div className="bg-[#0f1522] border border-surface-variant rounded p-4 flex justify-between items-center">
-            <p className="font-data-mono text-xs text-on-surface-variant flex items-center gap-2">
-              <span className="material-symbols-outlined text-[16px] text-primary-container">
-                recycling
-              </span>{" "}
-              Resource Enclave Active
-            </p>
-            <p className="font-data-mono text-xs text-primary-container">SIG-ADAPTIVE / DYNAMIC</p>
-          </div>
+          <LoginTrustSignals />
           <footer className="pt-8 flex justify-center">
             <p className="font-label-md text-on-surface-variant opacity-40 uppercase tracking-widest text-[10px]">
               Powered by RAMOLAY

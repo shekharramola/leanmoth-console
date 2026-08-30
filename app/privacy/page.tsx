@@ -7,7 +7,7 @@ const centralContent =
   "w-full max-w-2xl mx-auto px-6 py-12 md:py-20 flex-1 flex flex-col space-y-10";
 const headerBlock = "flex flex-col space-y-3 pb-8 border-b border-surface-variant/30";
 const clauseSection =
-  "flex flex-col space-y-3 relative pl-6 before:absolute before:left-0 before:top-2 before:w-1 before:h-4 before:bg-strategic-primary/40";
+  "flex flex-col space-y-3 relative pl-6 before:absolute before:left-0 before:top-2 before:w-1 before:h-4 before:bg-primary-container/40";
 
 // Content Typography Handles
 const badgeTheme =
