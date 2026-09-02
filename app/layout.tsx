@@ -3,6 +3,7 @@ import { Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
 import "./globals.css";
+import { GlobalFooter } from "@/components/GlobalFooter";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { UserSessionProvider } from "@/context/UserSessionContext";
 
@@ -22,13 +23,17 @@ const jetbrainsMono = JetBrains_Mono({
 const materialSymbols = localFont({
   src: "./fonts/material-symbols-outlined.woff2",
   variable: "--font-material-symbols",
-  display: "swap",
-  adjustFontFallback: "Arial",
+  display: "block",
 });
 
 export const metadata: Metadata = {
   title: "LeanMoth - Optimization Engine",
   description: "AWS Data-Transfer Cost Auditor",
+  icons: {
+    icon: "/brand/logo.webp",
+    shortcut: "/brand/logo.webp",
+    apple: "/brand/logo.webp",
+  },
 };
 
 interface RootLayoutProps {
@@ -45,6 +50,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <UserSessionProvider>
           <GlobalHeader />
           {children}
+          <GlobalFooter />
         </UserSessionProvider>
       </body>
     </html>

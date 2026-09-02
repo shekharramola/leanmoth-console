@@ -16,8 +16,6 @@ const mainTitleH1 = "text-3xl font-bold font-main text-white tracking-tight";
 const sectionTitleH2 =
   "text-sm font-mono font-semibold tracking-wider text-white uppercase flex items-center gap-2";
 const textParagraph = "text-sm font-main text-on-surface-variant leading-relaxed font-normal";
-const signatureFloor =
-  "pt-12 text-center border-t border-surface-variant/20 font-mono text-[10px] tracking-[0.25em] text-on-surface-variant/30 uppercase";
 
 export default function PrivacyPage() {
   return (
@@ -95,11 +93,6 @@ export default function PrivacyPage() {
             delay required.
           </p>
         </section>
-
-        {/* Central Corporate Watermark Stamp */}
-        <footer className={signatureFloor}>
-          Security Boundary Scope: RAMOLAY Infrastructure Trust
-        </footer>
       </main>
     </div>
   );

@@ -52,9 +52,9 @@ export function DropZone() {
     setStatus("unlocking");
 
     try {
-      const checkoutUrl = await createCheckoutLink(result.reportId);
-      if (checkoutUrl && typeof checkoutUrl === "string") {
-        window.location.href = checkoutUrl;
+      const checkout = await createCheckoutLink(result.reportId);
+      if (checkout.checkoutUrl) {
+        window.location.href = checkout.checkoutUrl;
       }
     } catch {
       setStatus("error");

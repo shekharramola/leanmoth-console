@@ -49,9 +49,6 @@ const featureCardBody = "font-main text-xs text-on-surface-variant leading-relax
 const whyUsSection = "w-full max-w-3xl mx-auto px-6 pb-4 text-left space-y-3";
 const whyUsBody = "text-sm text-on-surface-variant leading-relaxed font-main";
 
-const footerLayout =
-  "w-full max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between px-6 py-8 border-t border-surface-variant/20 text-[10px] font-mono text-on-surface-variant/30 uppercase tracking-widest";
-
 export function Landing() {
   return (
     <div className={outerWrapper}>
@@ -155,11 +152,6 @@ export function Landing() {
           </Link>
         </div>
       </main>
-
-      <footer className={footerLayout}>
-        <p>© 2026 RAMOLAY. All Rights Reserved.</p>
-        <p>No license granted for reuse — public for verification only.</p>
-      </footer>
     </div>
   );
 }

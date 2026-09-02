@@ -13,8 +13,6 @@ const sectionLabelH2 =
   "text-xs font-mono font-bold uppercase tracking-widest text-white border-b border-surface-variant/20 pb-2 mb-4 block";
 const dataPanelContainer =
   "p-6 rounded bg-surface-container-lowest border border-surface-variant/20 shadow-xl shadow-black/30 flex flex-col";
-const signatureFooter =
-  "pt-8 text-center font-mono text-[10px] tracking-[0.25em] text-on-surface-variant/20 uppercase select-none";
 
 export default function DashboardPage() {
   const { isLoggedIn } = useUserSession();
@@ -54,10 +52,6 @@ export default function DashboardPage() {
             <DropZone />
           </div>
         </section>
-
-        <footer className={signatureFooter}>
-          System Boundary Security Scope: RAMOLAY Infrastructure Trust
-        </footer>
       </main>
     </div>
   );

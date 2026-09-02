@@ -105,11 +105,6 @@ export default function LoginPage() {
           </header>
           <LoginForm />
           <LoginTrustSignals />
-          <footer className="pt-8 flex justify-center">
-            <p className="font-label-md text-on-surface-variant opacity-40 uppercase tracking-widest text-[10px]">
-              Powered by RAMOLAY
-            </p>
-          </footer>
         </div>
       </main>
     </div>

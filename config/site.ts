@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "LeanMoth",
-  parentBrand: "RAMOLAY",
+  parentBrand: "RamolaTech",
   links: {
     github: "https://github.com/shekharramola/leanmoth-console",
   },
