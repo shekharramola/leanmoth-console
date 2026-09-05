@@ -1,1 +1,7 @@
 dev/
+**/cache/turbopack/**
+.next/cache
+.wranger/
+**/.wrangler/**
+node_modules
+.git/
