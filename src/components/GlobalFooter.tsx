@@ -35,8 +35,8 @@ export const GlobalFooter = () => {
       </div>
 
       <p className="m-0 text-center sm:text-right normal-case tracking-normal font-sans text-on-surface-variant/40">
-        &copy; 2026 LeanMoth. Operated by Shekhar Ramola on behalf of{" "}
-        <span className="font-semibold text-on-surface-variant/60">RamolaTech</span>
+        &copy; 2026 LeanMoth. Built and operated by Shekhar Ramola on behalf of RamolaTech. All
+        Rights Reserved.
       </p>
     </footer>
   );

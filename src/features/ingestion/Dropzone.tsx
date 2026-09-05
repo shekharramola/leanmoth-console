@@ -141,6 +141,18 @@ export function DropZone() {
           </button>
         </div>
       )}
+      {status === "done" && result && (
+        <p className="mt-2 text-xs text-on-surface-variant/60 text-center">
+          Paying from outside India? Email{" "}
+          <a
+            href={`mailto:support@leanmoth.ramolatech.com?subject=Report ${result.reportId}`}
+            className="underline"
+          >
+            support@leanmoth.ramolatech.com
+          </a>{" "}
+          with your report ID and we will sort it out manually.
+        </p>
+      )}
     </div>
   );
 }

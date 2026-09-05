@@ -1,10 +1,11 @@
 "use client";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { InferResponseType } from "hono";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 import { createCheckoutLink } from "@/features/checkout/checkout.api";
-import { buildReportPdf, Finding } from "@/features/reports/reports.pdfExport";
+import { ReportDocument, Finding } from "@/features/reports/buildReportPdf";
 import { apiClient } from "@/lib/apiClient";
 
 type ReportApiResponse = InferResponseType<(typeof apiClient.api.reports)[":id"]["$get"], 200>;
@@ -64,6 +65,7 @@ function getComparisonStatus(
 function ReportContent() {
   const searchParams = useSearchParams();
   const reportId = searchParams.get("id");
+  const reportRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState<ReportView>({ status: "loading" });
   const [isRedirecting, setIsRedirecting] = useState(false);
 
@@ -141,18 +143,8 @@ function ReportContent() {
     }
   }
 
-  function handleExportPdf() {
-    if (view.status !== "paid") return;
-    const doc = buildReportPdf({
-      potentialMonthlySavingsUsd: view.potentialMonthlySavingsUsd,
-      awsTotalVolumeGb: view.awsTotalVolumeGb,
-      findings: view.findings as Finding[],
-    });
-    doc.save("leanmoth-report.pdf");
-  }
-
   return (
-    <main className={mainWorkspaceCanvas}>
+    <main className={mainWorkspaceCanvas} ref={reportRef}>
       <div className={introBlockHeading}>
         <span className="inline-block px-2 py-0.5 bg-surface-variant border border-surface-variant/60 text-[10px] font-mono tracking-widest text-primary-container uppercase rounded mb-2">
           &gt;_ Finops Intelligence Briefing
@@ -178,6 +170,17 @@ function ReportContent() {
               {isRedirecting ? "Redirecting..." : "Pay now to unlock"}
             </button>
           </div>
+
+          <p className="text-xs text-on-surface-variant/60">
+            Paying from outside India? Email{" "}
+            <a
+              href={`mailto:support@leanmoth.ramolatech.com?subject=Report ${reportId}`}
+              className="underline"
+            >
+              support@leanmoth.ramolatech.com
+            </a>{" "}
+            and we will sort it out manually.
+          </p>
         </div>
       )}
 
@@ -194,9 +197,25 @@ function ReportContent() {
               cloud waste. Every billing cycle after this one, those optimizations represent
               **recurring capital back in your engine**, recovered for a single flat report fee.
             </p>
-            <button onClick={handleExportPdf} className={checkoutActionBtn}>
+            {/* <button onClick={handleExportPdf} className={checkoutActionBtn}>
               Export as PDF
-            </button>
+            </button> */}
+            <PDFDownloadLink
+              document={
+                <ReportDocument
+                  potentialMonthlySavingsUsd={view.potentialMonthlySavingsUsd}
+                  awsTotalVolumeGb={view.awsTotalVolumeGb}
+                  findings={view.findings as Finding[]}
+                />
+              }
+              fileName={`LeanMoth_Executive_Report_${new Date().toISOString().split("T")[0]}.pdf`}
+            >
+              {({ loading }) => (
+                <button disabled={loading} className={checkoutActionBtn}>
+                  {loading ? "Compiling Document..." : "Download Report"}
+                </button>
+              )}
+            </PDFDownloadLink>
           </div>
 
           {/* High-Fidelity Waste Findings Feed */}
@@ -205,13 +224,7 @@ function ReportContent() {
               Identified Network Waste Vectors
             </h2>
             <ul className={findingsListStack}>
-              {(
-                view.findings as {
-                  label: string;
-                  estimatedMonthlyCostUsd: number;
-                  detail: string;
-                }[]
-              ).map((finding) => {
+              {(view.findings as Finding[]).map((finding) => {
                 const comparisonEntry = (
                   view.comparison as
                     | {
@@ -244,6 +257,13 @@ function ReportContent() {
                       >
                         {comparisonStatus.label}
                       </p>
+                    )}
+                    {finding.remediationSteps && finding.remediationSteps.length > 0 && (
+                      <ol className="mt-2 space-y-1 text-xs text-on-surface-variant list-decimal list-inside">
+                        {finding.remediationSteps.map((step, index) => (
+                          <li key={index}>{step}</li>
+                        ))}
+                      </ol>
                     )}
                   </li>
                 );

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { LoginForm } from "@/features/auth/LoginForm";
 
@@ -67,14 +68,16 @@ export default function LoginPage() {
         {/* Header / Logo */}
         <header className="relative z-10 mb-section-gap">
           <div className="mb-8 filter drop-shadow-[0_0_12px_rgba(0,255,157,0.4)]">
-            <Image
-              src="/brand/logo.webp"
-              alt="LeanMoth logo"
-              width={64}
-              height={64}
-              priority // Tells Next.js to load this instantly on first paint without lazy-load lag
-              className="w-8 h-8 md:w-10 md:h-10 object-contain"
-            />
+            <Link href="/" className="inline-block cursor-pointer focus:outline-none rounded-md">
+              <Image
+                src="/brand/logo.webp"
+                alt="LeanMoth logo"
+                width={64}
+                height={64}
+                priority // Tells Next.js to load this instantly on first paint without lazy-load lag
+                className="w-8 h-8 md:w-10 md:h-10 object-contain"
+              />
+            </Link>
           </div>
           <div>
             <h1 className="font-display-lg-mobile md:font-display-lg text-white tracking-tight leading-none mb-2">
