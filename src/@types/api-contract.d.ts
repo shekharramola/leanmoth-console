@@ -21,6 +21,14 @@ declare const routes: import("hono/hono-base").HonoBase<
                   error: string;
                 };
                 outputFormat: "json";
+                status: 429;
+              }
+            | {
+                input: {};
+                output: {
+                  error: string;
+                };
+                outputFormat: "json";
                 status: 400;
               }
             | {
@@ -145,7 +153,8 @@ declare const routes: import("hono/hono-base").HonoBase<
                   reportId: string;
                   awsTotalVolumeGb: number;
                   potentialMonthlySavingsUsd: number;
-                  reportPriceInPaise: number;
+                  priceInSubUnits: number;
+                  currency: "USD" | "INR";
                 };
                 outputFormat: "json";
                 status: import("hono/utils/http-status").ContentfulStatusCode;
@@ -198,6 +207,8 @@ declare const routes: import("hono/hono-base").HonoBase<
                       status: "unpaid";
                       awsTotalVolumeGb: number;
                       potentialMonthlySavingsUsd: number;
+                      priceInSubUnits: number;
+                      currency: "INR" | "USD";
                     }
                   | {
                       status: "paid";
@@ -207,6 +218,7 @@ declare const routes: import("hono/hono-base").HonoBase<
                         label: string;
                         estimatedMonthlyCostUsd: number;
                         detail: string;
+                        remediationSteps: string[];
                       }[];
                       comparison:
                         | {

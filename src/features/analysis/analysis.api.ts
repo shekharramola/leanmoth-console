@@ -6,7 +6,8 @@ export type AnalyzeResult = {
   reportId: string;
   awsTotalVolumeGb: number;
   potentialMonthlySavingsUsd: number;
-  reportPriceInPaise: number;
+  priceInSubUnits: number;
+  currency: "USD" | "INR";
 };
 
 export async function analyzeEntries(entries: ParsedUsageEntry[]) {

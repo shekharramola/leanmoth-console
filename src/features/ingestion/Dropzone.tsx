@@ -60,6 +60,7 @@ export function DropZone() {
       setStatus("error");
     }
   }
+  const currencySymbol = result?.currency === "INR" ? "₹" : "$";
 
   return (
     <div className={masterContainer}>
@@ -137,7 +138,10 @@ export function DropZone() {
         <div className="pt-2 animate-fadeIn">
           <button onClick={handleUnlockClick} className={checkoutActionBtn}>
             <span className="material-symbols-outlined text-base">lock_open</span>
-            <span>Unlock full report for ₹{(result.reportPriceInPaise / 100).toFixed(0)}</span>
+            <span>
+              Unlock full report for {currencySymbol}
+              {(result.priceInSubUnits / 100).toFixed(0)}
+            </span>
           </button>
         </div>
       )}

@@ -22,7 +22,7 @@ const checkoutActionBtn =
 
 // State Message Layout Containers
 const statusFeedbackBox =
-  "p-4 border border-outline-variant/20 rounded bg-surface-container-low font-mono text-xs uppercase tracking-wider text-on-surface-variant/70 flex items-center gap-2.5 animate-fadeIn";
+  "p-4 flex flex-col border border-outline-variant/20 rounded bg-surface-container-low font-mono text-xs uppercase tracking-wider text-on-surface-variant/70 flex items-center gap-2.5 animate-fadeIn";
 const loadingEnclaveView =
   "min-h-[40vh] flex flex-col items-center justify-center font-mono text-xs text-on-surface-variant/60 uppercase tracking-widest gap-2.5";
 const criticalErrorView =
@@ -163,15 +163,17 @@ function ReportContent() {
       {view.status === "unpaid" && view.potentialMonthlySavingsUsd > 0 && (
         <div className={statusFeedbackBox} role="status" aria-live="polite">
           <span className="material-symbols-outlined text-[16px] text-primary-container">lock</span>
+          <span>
+            Unlock for {view.currency === "INR" ? "₹" : "$"}
+            {(view.priceInSubUnits / 100).toFixed(0)}
+          </span>
           <div className="flex flex-col gap-2">
-            <span>Payment not yet confirmed for this report.</span>
-
             <button onClick={handlePayNow} disabled={isRedirecting} className={checkoutActionBtn}>
               {isRedirecting ? "Redirecting..." : "Pay now to unlock"}
             </button>
           </div>
 
-          <p className="text-xs text-on-surface-variant/60">
+          <p className="text-xs text-on-surface-variant/60 normal-case">
             Paying from outside India? Email{" "}
             <a
               href={`mailto:support@leanmoth.ramolatech.com?subject=Report ${reportId}`}
