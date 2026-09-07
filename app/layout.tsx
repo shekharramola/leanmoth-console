@@ -27,8 +27,9 @@ const materialSymbols = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "LeanMoth - Optimization Engine",
-  description: "AWS Data-Transfer Cost Auditor",
+  title: "LeanMoth — 100% Client-Side AWS Cost Auditor",
+  description:
+    "Identify architectural cloud waste entirely in your browser. Zero data collection, completely open source, and pricing strictly capped at $50.",
   icons: {
     icon: "/brand/logo.webp",
     shortcut: "/brand/logo.webp",
