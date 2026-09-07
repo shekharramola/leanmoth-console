@@ -83,7 +83,7 @@ export default function LoginPage() {
             <h1 className="font-display-lg-mobile md:font-display-lg text-white tracking-tight leading-none mb-2">
               LeanMoth
               <br />
-              Optimization Engine
+              AWS Cost Auditor
             </h1>
           </div>
         </header>
@@ -99,7 +99,10 @@ export default function LoginPage() {
             <span className="inline-block px-2 py-1 bg-surface-variant text-on-surface-variant font-label-md rounded mb-4">
               Sign In
             </span>
-            <h2 className="font-display-lg-mobile text-white mb-2 tracking-tight">
+            <h2
+              id="portal-main-heading"
+              className="font-display-lg-mobile text-white mb-2 tracking-tight"
+            >
               Access Your Reports
             </h2>
             <p className="font-body-md text-on-surface-variant">
