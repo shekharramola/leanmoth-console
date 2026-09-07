@@ -6,6 +6,16 @@ export const GlobalFooter = () => {
     <footer className={footerLayout}>
       <div className="flex items-center gap-x-2 gap-y-1 flex-wrap justify-center sm:justify-start mb-4 sm:mb-0">
         <a
+          href="https://github.com/shekharramola/leanmoth-console"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary-container hover:text-white transition-colors normal-case tracking-normal font-sans text-xs flex items-center gap-1 mr-2"
+        >
+          <span className="material-symbols-outlined text-xs">code</span> Audit Code
+        </a>
+        <span className="text-surface-variant/40 select-none mr-1">/</span>
+
+        <a
           href="https://ramolatech.com/privacy.html"
           className="text-on-surface-variant/50 hover:text-white transition-colors"
         >

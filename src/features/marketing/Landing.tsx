@@ -7,8 +7,6 @@ const heroSection =
 
 const mainHeadline =
   "font-display-lg-mobile md:text-5xl text-white font-bold tracking-tight max-w-3xl leading-[1.12]";
-const textSubDescription =
-  "text-sm md:text-base text-on-surface-variant max-w-2xl mx-auto leading-relaxed font-main";
 const ctaPrimaryButton =
   "px-6 py-3.5 rounded btn-glow text-void-base font-bold font-main text-xs uppercase tracking-widest flex items-center gap-2 hover:opacity-90 active:scale-[0.99] transition-all cursor-pointer shadow-[0_0_30px_rgba(0,255,157,0.15)]";
 
@@ -61,10 +59,12 @@ const featureCardTitle =
   "font-mono text-xs font-semibold uppercase tracking-wider text-primary-container flex items-center gap-2";
 const featureCardBody = "font-main text-xs text-on-surface-variant leading-relaxed";
 
-const whyUsSection = "w-full max-w-3xl mx-auto px-6 pb-4 text-left space-y-3";
+const whyUsSection = "w-full max-w-2xl mx-auto px-6 pb-4 text-left space-y-3";
+
 const whyUsBody = "text-sm text-on-surface-variant leading-relaxed font-main";
 
 const howItWorksGrid = "grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl text-left";
+
 const howItWorksStep = "space-y-2";
 const howItWorksNumber =
   "w-7 h-7 rounded-full bg-primary-container text-void-base flex items-center justify-center font-mono text-xs font-bold";
@@ -84,34 +84,32 @@ export function Landing() {
           See exactly what is standing between you and{" "}
           <span className="text-primary-container">a lean cloud bill</span>.
         </h1>
-
-        <p className={textSubDescription}>
-          LeanMoth reads and analyzes your AWS Cost & Usage report entirely in your browser. The raw
-          CSV never leaves your machine — only a summarized, anonymized metrics snapshot is sent for
-          analysis.
+        <p className="flex items-center justify-center gap-2 text-sm md:text-base font-medium">
+          <span role="img" aria-label="shield">
+            🛡️
+          </span>
+          100% Client-Side. Your raw AWS billing data never leaves your browser.
         </p>
-
         <div className={featuresTripleGrid} aria-label="Core Architectural Pillars">
           <div className={featureCardFrame}>
             <h3 className={featureCardTitle}>
               <span className="material-symbols-outlined text-sm">shield_lock</span>
-              100% Client-Side
+              Zero-Data Retention
             </h3>
             <p className={featureCardBody}>
               Your account IDs, resource names, and tags are never read from the file at all — not
               redacted after the fact, simply never touched. Only usage type, data volume, and cost
-              per line item ever leave your browser.
+              per line item ever leave your browser.{" "}
             </p>
           </div>
-
           <div className={featureCardFrame}>
             <h3 className={featureCardTitle}>
               <span className="material-symbols-outlined text-sm">terminal</span>
               Publicly Verifiable
             </h3>
             <p className={featureCardBody}>
-              A privacy claim shouldn&apos;t require trust. Our client-side parsing code is public
-              on GitHub — read exactly what it does and doesn&apos;t touch, yourself.
+              A privacy claim should not require trust. Our client-side parsing code is public on
+              GitHub — read exactly what it does and does not. touch, yourself.
             </p>
           </div>
 
@@ -128,7 +126,7 @@ export function Landing() {
           </div>
         </div>
 
-        <div className="w-full max-w-4xl">
+        <div className="w-full max-w-4xl mx-auto px-6">
           <h2 className="font-mono text-xs font-semibold uppercase tracking-wider text-on-surface-variant/60 mb-4 text-left">
             How it works
           </h2>
@@ -136,15 +134,14 @@ export function Landing() {
             <div className={howItWorksStep}>
               <span className={howItWorksNumber}>1</span>
               <p className="text-sm text-on-surface-variant">
-                Drop your AWS Cost & Usage CSV. It&apos;s parsed entirely in your browser — nothing
+                Drop your AWS Cost & Usage CSV. It is parsed entirely in your browser — nothing
                 uploaded yet.
               </p>
             </div>
             <div className={howItWorksStep}>
               <span className={howItWorksNumber}>2</span>
               <p className="text-sm text-on-surface-variant">
-                Get an instant, free headline number — how much you&apos;re likely wasting per
-                month.
+                Get an instant, free headline number — how much you are likely wasting per month.
               </p>
             </div>
             <div className={howItWorksStep}>
@@ -162,10 +159,9 @@ export function Landing() {
             Did your fix actually work?
           </h2>
           <p className={whyUsBody}>
-            Run a report today, run another one after you&apos;ve made changes — we show you exactly
-            which findings improved, which stayed flat, and what&apos;s new. Every report
-            you&apos;ve ever run stays saved, so you&apos;re always comparing against real history,
-            not memory.
+            Run a report today, run another one after you have made changes — we show you exactly
+            which findings improved, which stayed flat, and what is new. Every report you have ever
+            run stays saved, so you are always comparing against real history, not memory.
           </p>
         </div>
 
@@ -185,7 +181,7 @@ export function Landing() {
                 >
                   <div className="flex items-center justify-between gap-4">
                     <span className="text-sm font-medium text-white">{finding.label}</span>
-                    <span className="font-data-mono text-sm font-bold text-primary-container shrink-0">
+                    <span className="font-mono text-sm font-bold text-primary-container shrink-0">
                       -${finding.cost}/mo
                     </span>
                   </div>
@@ -205,19 +201,39 @@ export function Landing() {
         </div>
 
         <div className={pricingSection}>
-          <h2 className="font-mono text-xs font-semibold uppercase tracking-wider text-on-surface-variant/60">
-            Pricing
+          <h2 className="font-mono text-xs font-semibold uppercase tracking-wider text-primary-container mb-3">
+            💰 Transparent, Fair Pricing
           </h2>
-          <p className="text-sm text-on-surface-variant">
-            One report, one payment — no subscription. We charge roughly 15% of one month&apos;s
-            discovered savings, with a small minimum and a $50 cap, so the price always scales with
-            what you actually get.
-          </p>
+
+          <ul className="text-xs md:text-sm text-on-surface-variant max-w-xl mx-auto text-left space-y-2 font-main list-disc pl-5">
+            <li>
+              <strong className="text-white">Free Scan:</strong> See your headline waste number
+              instantly for $0.
+            </li>
+            <li>
+              <strong className="text-white">Performance Fee:</strong> Pay roughly 15% of one
+              month&apos;s discovered savings.
+            </li>
+            <li>
+              <strong className="text-white">Strictly Capped:</strong> You will never pay more than
+              $50, no matter how many thousands we find.
+            </li>
+            <li>
+              <span className="italic text-primary-container/80">
+                If we find $0 in architectural waste, you pay absolutely nothing.
+              </span>
+            </li>
+          </ul>
+
+          <div className="text-[10px] font-mono text-on-surface-variant/60 pt-4 uppercase tracking-wider max-w-xl mx-auto leading-relaxed">
+            💳 Secure global checkout via Razorpay • International users can pay seamlessly using
+            PayPal
+          </div>
         </div>
 
         <div className="pt-4">
           <Link href="/login" className={ctaPrimaryButton}>
-            <span>Get Started</span>
+            <span> Get Started — Scan Report Free</span>
             <span className="material-symbols-outlined text-base">arrow_forward</span>
           </Link>
         </div>
