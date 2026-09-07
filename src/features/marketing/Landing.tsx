@@ -59,7 +59,7 @@ const featureCardTitle =
   "font-mono text-xs font-semibold uppercase tracking-wider text-primary-container flex items-center gap-2";
 const featureCardBody = "font-main text-xs text-on-surface-variant leading-relaxed";
 
-const whyUsSection = "w-full max-w-2xl mx-auto px-6 pb-4 text-left space-y-3";
+const whyUsSection = "w-full max-w-2xl mx-auto px-6 pb-4 text-left space-y-3 pt-5";
 
 const whyUsBody = "text-sm text-on-surface-variant leading-relaxed font-main";
 
@@ -226,8 +226,7 @@ export function Landing() {
           </ul>
 
           <div className="text-[10px] font-mono text-on-surface-variant/60 pt-4 uppercase tracking-wider max-w-xl mx-auto leading-relaxed">
-            💳 Secure global checkout via Razorpay • International users can pay seamlessly using
-            PayPal
+            💳 Secure global checkout via Razorpay • Global users can pay seamlessly using PayPal
           </div>
         </div>
 
