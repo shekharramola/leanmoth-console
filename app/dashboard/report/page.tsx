@@ -172,17 +172,6 @@ function ReportContent() {
               {isRedirecting ? "Redirecting..." : "Pay now to unlock"}
             </button>
           </div>
-
-          <p className="text-xs text-on-surface-variant/60 normal-case">
-            Paying from outside India? Email{" "}
-            <a
-              href={`mailto:support@leanmoth.ramolatech.com?subject=Report ${reportId}`}
-              className="underline"
-            >
-              support@leanmoth.ramolatech.com
-            </a>{" "}
-            and we will sort it out manually.
-          </p>
         </div>
       )}
 
