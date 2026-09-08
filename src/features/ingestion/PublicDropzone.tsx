@@ -52,10 +52,7 @@ export function PublicDropZone() {
         </p>
       </div>
       {status === "done" && (
-        <Link
-          href="/login"
-          className="inline-block underline text-primary-container text-sm text-center"
-        >
+        <Link href="/login" className="block underline text-primary-container text-sm text-center">
           Sign in to see exactly which patterns are wasting money →
         </Link>
       )}
