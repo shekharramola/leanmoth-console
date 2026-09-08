@@ -6,7 +6,7 @@ import { analyzeEntries, type AnalyzeResult } from "../analysis/analysis.api";
 import { createCheckoutLink } from "../checkout/checkout.api";
 
 const masterContainer = "w-full max-w-md mx-auto space-y-6";
-const dropScanningBay =
+export const dropScanningBay =
   "relative group rounded border-2 border-dashed border-outline-variant/40 bg-surface-container-low/40 p-8 flex flex-col items-center justify-center text-center transition-all duration-200 hover:border-primary-container/40 focus-within:border-primary-container min-h-[200px]";
 const textMainLabel =
   "font-mono text-xs font-semibold text-white uppercase tracking-widest cursor-pointer mb-2 block";

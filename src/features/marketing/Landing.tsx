@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { PublicDropZone } from "../ingestion/PublicDropzone";
+
 const outerWrapper =
   "min-h-screen bg-background text-on-surface font-body-md antialiased flex flex-col justify-between select-none";
 const heroSection =
@@ -198,6 +200,9 @@ export function Landing() {
               ))}
             </div>
           </div>
+        </div>
+        <div className="w-full max-w-md mx-auto px-6 pb-4">
+          <PublicDropZone />
         </div>
 
         <div className={pricingSection}>
