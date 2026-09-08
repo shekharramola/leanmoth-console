@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PublicDropZone } from "../ingestion/PublicDropzone";
 
 const outerWrapper =
-  "min-h-screen bg-background text-on-surface font-body-md antialiased flex flex-col justify-between select-none";
+  "min-h-screen bg-background text-on-surface font-body-md antialiased flex flex-col justify-between";
 const heroSection =
   "w-full max-w-5xl mx-auto flex flex-col items-center text-center px-6 py-16 md:py-24 space-y-12 my-auto";
 
@@ -86,11 +86,13 @@ export function Landing() {
           See exactly what is standing between you and{" "}
           <span className="text-primary-container">a lean cloud bill</span>.
         </h1>
-        <p className="flex items-center justify-center gap-2 text-sm md:text-base font-medium">
-          <span role="img" aria-label="shield">
-            🛡️
-          </span>
-          100% Client-Side. Your raw AWS billing data never leaves your browser.
+        <p className="text-xl text-slate-300 font-medium">
+          🔍 Instantly detect hidden Cross-AZ transfers, NAT Gateway processing leaks, and Internet
+          egress waste.
+        </p>
+
+        <p className="text-base text-emerald-400 font-normal">
+          🛡️ 100% Client-Side. Your raw AWS billing data never leaves your browser.
         </p>
         <div className={featuresTripleGrid} aria-label="Core Architectural Pillars">
           <div className={featureCardFrame}>
