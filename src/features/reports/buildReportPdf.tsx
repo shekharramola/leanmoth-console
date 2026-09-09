@@ -109,12 +109,14 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     color: "#059669",
     marginTop: 4,
+    marginBottom: 4,
   },
   summaryValue: {
     fontSize: 22,
     fontFamily: "Helvetica-Bold",
     color: "#0c1324",
     marginTop: 4,
+    marginBottom: 4,
   },
   summaryDesc: {
     fontSize: 9,
@@ -265,7 +267,8 @@ export const ReportDocument = ({
             ${potentialMonthlySavingsUsd.toLocaleString()} / mo
           </Text>
           <Text style={styles.summaryDesc}>
-            Annualized run-rate optimization potential loops out to $50,400.
+            Estimated annualized savings: $
+            {Math.round(potentialMonthlySavingsUsd * 12).toLocaleString()}.
           </Text>
         </View>
         <View style={styles.summaryColRight}>
