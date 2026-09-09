@@ -13,6 +13,7 @@ export const GlobalFooter = () => {
         >
           <span className="material-symbols-outlined text-xs">code</span> Audit Code
         </a>
+
         <span className="text-surface-variant/40 select-none mr-1">/</span>
 
         <a

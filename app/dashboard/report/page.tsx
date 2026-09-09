@@ -172,6 +172,12 @@ function ReportContent() {
               {isRedirecting ? "Redirecting..." : "Pay now to unlock"}
             </button>
           </div>
+          {view.currency === "USD" && (
+            <p className="text-xs text-on-surface-variant/60 normal-case">
+              Paying via PayPal? Select <strong>USD</strong> as the currency, even if you&rsquo;re
+              not in the US — that&apos;s what our payment link is set up to expect.
+            </p>
+          )}
         </div>
       )}
 

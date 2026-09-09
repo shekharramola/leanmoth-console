@@ -145,6 +145,12 @@ export function DropZone() {
           </button>
         </div>
       )}
+      {status === "done" && result && result.currency === "USD" && (
+        <p className="mt-2 text-xs text-on-surface-variant/60 text-center normal-case">
+          Paying from outside India? PayPal is accepted at checkout — select <strong>USD</strong> as
+          the currency, regardless of your own country, to complete payment correctly.
+        </p>
+      )}
     </div>
   );
 }
